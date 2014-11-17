@@ -1,0 +1,10 @@
+<fpdoc-description>
+  <package name="fpGopher">
+    <module name="GopherLog">
+      <descr>
+        Provides logging functionality to
+        <link id="GopherServer.TGopherServer">TGopherServer</link>.
+      </descr>
+    </module>
+  </package>
+</fpdoc-description>

@@ -1,0 +1,112 @@
+<fpdoc-descriptions>
+  <package name="fpGopher">
+    <module name="GopherConsts">
+      <descr>
+        Some useful constants.
+      </descr>
+      <element name="DotGopher">
+        <short>Default gopher directory file</short>
+        <descr>
+          The default filename that the server looks for in directories to
+          use as a configuration file for that directory's menu.
+        </descr>
+      </element>
+      <element name="giArchive">
+        <short>Binary archive</short>
+      </element>
+      <element name="giAudio">
+        <short>Audio file</short>
+        <descr>
+          Indicates file is any kind of audio file.
+        </descr>
+      </element>
+      <element name="giBinary">
+        <short>Binary file</short>
+        <descr>
+          Indicates file has binary (non-plaintext) contents
+        </descr>
+      </element>
+      <element name="giBinHex">
+        <short>BinHex encoded file</short>
+      </element>
+      <element name="giCSO">
+        <short>CSO search query</short>
+      </element>
+      <element name="giDirectory">
+        <short>A directory</short>
+      </element>
+      <element name="giError">
+        <short>An error</short>
+        <descr>
+          Item is displayed as an error message
+        </descr>
+      </element>
+      <element name="giGIF">
+        <short>Graphics Interchange Format image</short>
+      </element>
+      <element name="giHTML">
+        <short>HyperText Markup Language formatted file</short>
+      </element>
+      <element name="giImage">
+        <short>Generic image file</short>
+      </element>
+      <element name="giInfo">
+        <short>Information (inline text) message</short>
+      </element>
+      <element name="giPlainText">
+        <short>Plain text file</short>
+      </element>
+      <element name="giSearch">
+        <short>Search engine query</short>
+      </element>
+      <element name="giTelnet">
+        <short>Telnet session pointer</short>
+      </element>
+      <element name="giTn3270">
+        <short>Tn3270 session pointer</short>
+      </element>
+      <element name="giUUE">
+        <short>UUEncoded text file</short>
+      </element>
+      <element name="GopherItemTypes">
+        <short>Set of all item types</short>
+      </element>
+      <element name="GopherPort">
+        <short>Default Gopher server port</short>
+      </element>
+      <element name="GopherURI">
+        <short>The URI prefix for Gopher addresses</short>
+      </element>
+      <element name="gsDir">
+        <short>Filesystem directory separator</short>
+      </element>
+      <element name="gsField">
+        <short>Separates fields in a Gopher item line</short>
+      </element>
+      <element name="gsLine">
+        <short>Separates lines in a Gopher menu file</short>
+      </element>
+      <element name="gsMenuItem">
+        <short>Separates items in a Gopher menu</short>
+      </element>
+      <element name="gsPath">
+        <short>Gopher URI separator</short>
+      </element>
+      <element name="gsQuery">
+        <short>Separates the Gopher selector from the query string</short>
+      </element>
+      <element name="gsQueryField">
+        <short>Separates fields in the query string</short>
+      </element>
+      <element name="gsSearch">
+        <short>Separates the selector from any search words</short>
+      </element>
+      <element name="gsTerminate">
+        <short>Terminates a gopher reply</short>
+      </element>
+      <element name="gsWord">
+        <short>Separates words in a search string</short>
+      </element>
+    </module>
+  </package>
+</fpdoc-descriptions>

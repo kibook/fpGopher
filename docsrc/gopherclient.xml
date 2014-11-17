@@ -1,0 +1,36 @@
+<fpdoc-description>
+  <package name="fpGopher">
+    <module name="GopherClient">
+      <descr>
+        Client for retrieving data from Gopher servers.
+      </descr>
+      <element name="TGopherClient.Get">
+        <short>Fetch data from Gopher server</short>
+        <example file="example/gopherclient_get"/>
+      </element>
+      <element name="TGopherClient.Get.Result">
+        <short>The data fetched as a string</short>
+      </element>
+      <element name="TGopherClient.SimpleGet">
+        <short>Fetch data from Gopher server</short>
+        <example file="example/gopherclient_simpleget"/>
+      </element>
+      <element name="TGopherClient.Host">
+        <short>Host name of Gopher server to connect to</short>
+      </element>
+      <element name="TGopherClient.Port">
+        <short>Port that the Gopher server is listening on</short>
+      </element>
+      <element name="TGopherClient.Selector">
+        <short>Selector of (path to) the directory or file to fetch</short>
+      </element>
+      <element name="TGopherClient.Contents">
+        <short>Contents fetched from the server</short>
+      </element>
+      <element name="TGopherclient.MenuItems">
+        <short>Indexed access to menu items</short>
+        <example file="example/gopherclient_menuitem"/>
+      </element>
+    </module>
+  </package>
+</fpdoc-description>

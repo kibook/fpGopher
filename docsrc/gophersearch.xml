@@ -1,0 +1,49 @@
+<fpdoc-description>
+  <package name="fpGopher">
+    <module name="GopherSearch">
+      <descr>
+        <p>
+          Provides search engines for local and remote Gopher content.
+        </p>
+      </descr>
+      <element name="TGopherSearch.Recursive">
+        <short>Search recursively in to subdirectories</short>
+      </element>
+      <element name="TGopherLocalSearch">
+        <short>Search this Gopher server</short>
+        <example file="example/gophersearch_local"/>
+      </element>
+      <element name="TGopherLocalSearch.Respond"/>
+      <element name="TGopherLocalSearch.SearchDir">
+        <short>Subdirectory to search in</short>
+        <descr>
+          <p>
+            Specify a subdirectory of the Gopher server to limit the
+            search to.
+          </p>
+          <p>
+            For multiple searches within different subdirectories, create
+            descendants class of TGopherSearch.
+          </p>
+        </descr>
+      </element>
+      <element name="TGopherRemoteSearch">
+        <short>Search another Gopher server</short>
+        <example file="example/gophersearch_remote"/>
+      </element>
+      <element name="TGopherRemoteSearch.Respond"/>
+      <element name="TGopherRemoteSearch.URI">
+        <short>Gopher URI of remote server to search</short>
+      </element>
+      <element name="TGopherRemoteSearch.Host">
+        <short>Host name of remote server to search</short>
+      </element>
+      <element name="TGopherRemoteSearch.Port">
+        <short>Port remote server is listening on</short>
+      </element>
+      <element name="TGopherRemoteSearch.Selector">
+        <short>Selector of directory to start remote search in</short>
+      </element>
+    </module>
+  </package>
+</fpdoc-description>

@@ -1,0 +1,1 @@
+Server.RootDir := '/var/gopher';

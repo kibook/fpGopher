@@ -1,0 +1,227 @@
+<fpdoc-description>
+  <package name="fpGopher">
+    <module name="GopherAction">
+      <descr>
+        <p>
+          GopherAction classes can be registered to certain patterns of
+          selectors, in a similar fashion to 'routes'. The classes use
+          regular expressions to perform the matching.
+        </p>
+      </descr>
+      <element name="TGopherAction">
+        <short>Action which is tied to a selector pattern</short>
+      </element>
+      <element name="TGopherAction.Create">
+        <descr>
+          TGopherAction classes should not normally need to be manually
+          instantiated. Use
+          <link id="TGopherAction.Register">Register</link> to register the
+          action class to a pattern, and the server will create an instance
+          of it when a request is made to a selector which matches the
+          registered pattern.
+        </descr>
+      </element>
+      <element name="TGopherAction.Register">
+        <short>Register a pattern</short>
+        <descr>
+          <p>
+            Registers this action class with <i>Pattern</i>, which
+            contains a regular expression.
+          </p>
+          <p>
+            If a selector is visited which matches this pattern, a new
+            instance of this class is created and the
+            <link id="TGopherAction.Respond">Respond </link> method is
+            called.
+          </p>
+        </descr>
+        <example file="example/gopheraction_register"/>
+      </element>
+      <element name="TGopherAction.Respond">
+        <short>Respond to a server request</short>
+        <descr>
+          <p>
+            When a selector matches a pattern registered to this class,
+            this method is called. <i>Sender</i> is the
+            <link id="GopherServer.TGopherServer">TGopherServer</link>
+            that instantiated the action.
+          </p>
+          <p>
+            This method should be overriden in a derived class.
+          </p>
+          <p>
+            The derived class can use the menu-generating functions
+            <link id="TGopherAction.WriteInfo">WriteInfo</link>,
+            <link id="TGopherAction.WriteError">WriteError</link>,
+            and <link id="TGopherAction.WriteItem">WriteItem</link>,
+            or write to
+            <link id="TGopherAction.ContentStream">ContentStream</link>
+            in this function to create the response.
+          </p>
+          <p>
+            Set <link id="TGopherAction.IsMenu">IsMenu</link> to False
+            when writing directly to the content stream.
+          </p>
+        </descr>
+        <example file="example/gopheraction_respond"/>
+      </element>
+      <element name="TGopherAction.WriteInfo">
+        <short>Write an information menu item</short>
+        <descr>
+          <p>
+            Adds an information/inline text item (type i) to the response
+            menu.
+          </p>
+          <p>
+            Should only be used with menu responses
+            (<link id="TGopherAction.IsMenu">IsMenu</link> = True)
+          </p>
+        </descr>
+        <example file="example/gopheraction_writeinfo"/>
+      </element>
+      <element name="TGopherAction.WriteItem">
+        <short>Write a custom menu item</short>
+        <descr>
+          <p>
+            Writes an item to the menu response.
+          </p>
+          <dl>
+            <dt>ItemName</dt><dd>The name of the menu item</dd>
+            <dt>ItemType</dt><dd>The Gopher item type of the menu item</dd>
+            <dt>ItemText</dt><dd>Text displayed on the menu</dd>
+            <dt>ItemPath</dt><dd>The real selector to the item (default is
+              the same as ItemName)</dd>
+            <dt>ItemHost</dt><dd>The hostname of the item (for linking to
+              other Gopher servers)</dd>
+            <dt>ItemPort</dt><dd>The port of the other Gopher server (if
+              different from the port this server is listening on)</dd>
+          </dl>
+        </descr>
+      </element>
+      <element name="TGopherAction.WriteError">
+        <short>Write an error menu item</short>
+        <example file="example/gopheraction_writeerror"/>
+      </element>
+      <element name="TGopherAction.Write">
+        <short>Write string to stream</short>
+        <descr>
+          Writes <i>S</i> directly to
+          <link id="TGopherAction.ContentStream">ContentStream</link>.
+          Useful for non-menu responses.
+        </descr>
+        <example file="example/gopheraction_write"/>
+      </element>
+      <element name="TGopherAction.RemoteAddress">
+        <short>Address of the Gopher client</short>
+      </element>
+      <element name="TGopherAction.Selector">
+        <short>The selector that was used to call this action</short>
+      </element>
+      <element name="TGopherAction.ContentStream">
+        <short>Direct stream access to the response's content</short>
+        <descr>
+          <p>
+            If the response is a menu
+            (<link id="TGopherAction.IsMenu">IsMenu</link> = True), this
+            contains the raw stream of a menu configuration.
+          </p>
+          <p>
+            If the response is not a menu, this contains the raw data that
+            will be sent back to the client.
+          </p>
+          <p>
+            Menu's should only use the
+            <link id="TGopherAction.WriteItem">WriteItem</link>,
+            <link id="TGopherAction.WriteInfo">WriteInfo</link>, and
+            <link id="TGopherAction.WriteError">WriteError</link>
+            procedures.
+          </p>
+          <p>
+            All other types of responses should write their data directly
+            to this stream.
+          </p>
+        </descr>
+        <example file="example/gopheraction_contentstream"/>
+      </element>
+      <element name="TGopherAction.IsMenu">
+        <short>Format of response</short>
+        <descr>
+          <p>
+            If the response of this action is meant to be a Gopher menu,
+            this property should be True, and the
+            <link id="TGopherAction.WriteItem">WriteItem</link>,
+            <link id="TGopherAction.WriteInfo">WriteInfo</link>, and
+            <link id="TGopherAction.WriteError">WriteError</link>
+            procedures should be used to format said menu.
+          </p>
+          <p>
+            If the response is not a menu (plain text, binary, image, etc),
+            then this property should be set to False, and data should be
+            written to
+            <link id="TGopherAction.ContentStream">ContentStream</link>
+            directly instead.
+          </p>
+          <p>
+            By default, it is True, and the server assumes it is a menu.
+          </p>
+        </descr>
+      </element>
+      <element name="TGopherAction.GopherFile">
+        <short>Menu configuration file interface</short>
+        <descr>
+          <p>
+            Responses which are menus use the same formatting as directory
+            menu configuration files.</p>
+          <p>
+            The raw data is stored in
+            <link id="TGopherAction.ContentStream">ContentStream</link>,
+            and this property provides the methods to read/write in the
+            proper format
+          </p>
+          <p>
+            Rather than using this property directly, the
+            <link id="TGopherAction.WriteItem">WriteItem</link>,
+            <link id="TGopherAction.WriteInfo">WriteInfo</link>, and
+            <link id="TGopherAction.WriteError">WriteError</link>
+            procedures should be preferred.
+          </p>
+        </descr>
+      </element>
+      <element name="TGopherAction.Query">
+        <short>Query string fields</short>
+        <descr>
+          Contains the names and values from a query string, if one exists.
+        </descr>
+        <example file="example/gopheraction_query"/>
+      </element>
+      <element name="TGopherAction.Params">
+        <short>Selector parameters</short>
+        <descr>
+          <p>
+            Actions are always matched from the start of the selector.
+          </p>
+          <p>
+            Any additional levels after the matched pattern are passed
+          to this property as a list.
+          </p>
+          <p>
+            The first parameter is the name of the action itself.
+          </p>
+        </descr>
+        <example file="example/gopheraction_params"/>
+      </element>
+      <element name="TGopherAction.Search">
+        <short>Search words</short>
+        <descr>
+          Any search words after the selector (preceded by either
+          <link id="GopherConsts.gsSearch">gsSearch</link> or
+          <link id="GopherConsts.gsQuery">gsQuery</link>) are placed in
+          this list.
+        </descr>
+        <seealso>
+          <link id="GopherSearch"/>
+        </seealso>
+      </element>
+    </module>
+  </package>
+</fpdoc-description>

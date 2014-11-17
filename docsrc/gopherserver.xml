@@ -1,0 +1,389 @@
+<fpdoc-description>
+  <package name="fpGopher">
+    <module name="GopherServer">
+      <descr>
+        A Gopher server.
+        <ul>
+          <li>Generates menus for directories</li>
+          <li>Customisable menus with configuration files</li>
+          <li>Moles (executable scripts)</li>
+          <li>Actions tied to patterns in the selector</li>
+        </ul>
+      </descr>
+      <topic name="Gopher Menu Files">
+        <short>Details on menu files for custom directory menus.</short>
+        <descr>
+          <p>
+            Normally, the menu that
+            <link id="TGopherServer">TGopherServer</link>
+            will generate for a real directory is a listing of all files
+            and subdirectories in it.
+          </p>
+          <p>
+            The menu for a directory can be configured with a special
+            file. This file contains entries for items in the menu,
+            including inline text.
+          </p>
+          <p>
+            Each item in this file consists of 1 to 6 properties.
+            Properties not included will have their default value.
+          </p>
+          <p>
+            <b>An example</b>:
+          </p>
+          <pre>
+[file.txt]
+Type = PlainText
+Text = file.txt
+Path = file.txt
+Host = localhost
+Port = 70
+          </pre>
+          <table>
+            <tr>
+              <td><b>Property</b></td>
+              <td><b>Description</b></td>
+              <td><b>Default Value</b></td>
+            </tr>
+            <tr>
+              <td>[file.txt]</td>
+              <td>Name of the item</td>
+              <td>Must be specified, and for files should be unique</td>
+            </tr>
+            <tr>
+              <td>Type = PlainText</td>
+              <td>Type of the item</td>
+              <td>Defaults to 'Info'
+                (<link id="GopherConsts.giInfo">giInfo</link>, information
+                message)</td>
+            </tr>
+            <tr>
+              <td>Text = file.txt</td>
+              <td>Display string on the menu</td>
+              <td>Defaults to the name of the item</td>
+            </tr>
+            <tr>
+              <td>Path = file.txt</td>
+              <td>The absolute selector of the item</td>
+              <td>Defaults to the absolute selector, generated from the
+                current selector and the name (using it as a relative
+                selector).</td>
+            </tr>
+            <tr>
+              <td>Host = localhost</td>
+              <td>The domain the item is on</td>
+              <td>Defaults to this server's domain</td>
+            </tr>
+            <tr>
+              <td>Port = 70</td>
+              <td>The port the domain is on</td>
+              <td>If the Host is the same as this server's host,
+                defaults to this server's port; otherwise, defaults
+                to <link id="GopherConsts.GopherPort">GopherPort
+                </link>.</td>
+            </tr>
+          </table>
+          <p>
+            Therefore, this entry is equivalent: 
+          </p>
+          <pre>
+[file.txt]
+Type = PlainText
+          </pre>
+          <p>
+            The Type property may either be the standard Gopher item
+            identifier, or the corresponding name below:
+          </p>
+          <table>
+            <tr>
+              <td><b>Type Name</b></td>
+              <td><b>Standard identifier</b></td>
+              <td><b>Constant</b></td>
+            </tr>
+            <tr>
+              <td>PlainText</td>
+              <td>0</td>
+              <td>
+                <link id="GopherConsts.giPlainText">giPlainText</link>
+              </td>
+            </tr>
+            <tr>
+              <td>Directory</td>
+              <td>1</td>
+              <td>
+                <link id="GopherConsts.giDirectory">giDirectory</link>
+              </td>
+            </tr>
+            <tr>
+              <td>CSO</td>
+              <td>2</td>
+              <td>
+                <link id="GopherConsts.giCSO">giCSO</link>
+              </td>
+            </tr>
+            <tr>
+              <td>Error</td>
+              <td>3</td>
+              <td>
+                <link id="GopherConsts.giError">giError</link>
+              </td>
+            </tr>
+            <tr>
+              <td>BinHex</td>
+              <td>4</td>
+              <td>
+                <link id="GopherConsts.giBinHex">giBinHex</link>
+              </td>
+            </tr>
+            <tr>
+              <td>Archive</td>
+              <td>5</td>
+              <td>
+                <link id="GopherConsts.giArchive">giArchive</link>
+              </td>
+            </tr>
+            <tr>
+              <td>UUE</td>
+              <td>6</td>
+              <td>
+                <link id="GopherConsts.giUUE">giUUE</link>
+              </td>
+            </tr>
+            <tr>
+              <td>Search</td>
+              <td>7</td>
+              <td>
+                <link id="GopherConsts.giSearch">giSearch</link>
+              </td>
+            </tr>
+            <tr>
+              <td>Telnet</td>
+              <td>8</td>
+              <td>
+                <link id="GopherConsts.giTelnet">giTelnet</link>
+              </td>
+            </tr>
+            <tr>
+              <td>Binary</td>
+              <td>9</td>
+              <td>
+                <link id="GopherConsts.giBinary">giBinary</link>
+              </td>
+            </tr>
+            <tr>
+              <td>GIF</td>
+              <td>g</td>
+              <td>
+                <link id="GopherConsts.giGIF">giGIF</link>
+              </td>
+            </tr>
+            <tr>
+              <td>HTML</td>
+              <td>h</td>
+              <td>
+                <link id="GopherConsts.giHTML">giHTML</link>
+              </td>
+            </tr>
+            <tr>
+              <td>Info</td>
+              <td>i</td>
+              <td>
+                <link id="GopherConsts.giInfo">giInfo</link>
+              </td>
+            </tr>
+            <tr>
+              <td>Image</td>
+              <td>I</td>
+              <td>
+                <link id="GopherConsts.giImage">giImage</link>
+              </td>
+            </tr>
+            <tr>
+              <td>Audio</td>
+              <td>s</td>
+              <td>
+                <link id="GopherConsts.giAudio">giAudio</link>
+              </td>
+            </tr>
+            <tr>
+              <td>Tn3270</td>
+              <td>T</td>
+              <td>
+                <link id="GopherConsts.giTn3270">giTn3270</link>
+              </td>
+            </tr>
+          </table>
+          <p>
+            <b>An example menu file:</b>
+          </p>
+          <pre>
+; This is a comment, it is ignored when generating the menu
+
+; Info messages
+[Welcome to this Gopher server!]
+[Feel free to look around...]
+
+; a file
+[file.txt]
+Type = PlainText
+
+; a subdirectory
+[subdir]
+Type = Directory
+Text = More Files
+
+; a mole script
+[stats.cgi]
+Type = PlainText
+Text = Server stats
+
+; a mole handler, note the query string
+[mailadmin.php?message=hello]
+Type = HTML
+Text = Say "hello" to the admin!
+
+; an action, generates a menu of random links
+[RandomLinks]
+Type = Directory
+Text = Some random links
+
+; a link to another Gopher server
+[floodgap]
+Type = Directory
+Text = Floodgap's Gopher Server
+Path = /
+Host = gopher.floodgap.com
+          </pre>
+        </descr>
+        <seealso>
+          <link id="TGopherServer.GopherFileName"/>
+        </seealso>
+      </topic>
+      <element name="TGopherServer.Create">
+        <descr>
+          <p>
+            <i>AHost</i> is the hostname that the server listens on. It is
+            also the default domain of all menu items.
+          </p>
+          <p>
+            Since TGopherServer is descended from TInetServer, you can also
+            use its constructors to specify a port to listen on. The
+            default port is
+            <link id="GopherConsts.Gopherport">GopherPort</link>.
+          </p>
+        </descr>
+        <example file="example/gopherserver_create"/>
+      </element>
+      <element name="TGopherServer.RootDir">
+        <short>Directory to serve from</short>
+        <example file="example/gopherserver_rootdir"/>
+      </element>
+      <element name="TGopherServer.ItemTypes">
+        <short>MIME to Gopher item type mapping</short>
+        <descr>
+          Maps standard MIME types to Gopher item types. Some common
+          types are already mapped (see Example below).
+        </descr>
+        <example file="example/gopherserver_itemtypes"/>
+      </element>
+      <element name="TGopherServer.AllowMole">
+        <short>Enable "Moles"</short>
+        <descr>
+          <p>
+            A "mole" is an executable or executable script which can
+            be run on the Gopher server, similar to a CGI script.
+          </p>
+          <p>
+            Like in CGI, moles can access several environment variables
+            passed from the server.
+          </p>
+          <p>
+            TGopherServer uses the same names for these variables as CGI,
+            minus a few that are specific to the HTTP protocol.
+          </p>
+          <p>
+            ".cgi" is also the default extension for mole scripts.
+            Extensions can be added/removed with
+            <link id="TGopherServer.MoleExtensions">MoleExtensions</link>.
+          </p>
+          <p>
+            Also as with CGI, the nature of anonymously run executables
+            can be <b>dangerous</b>, so <b>exercise caution</b> when making
+            use of this feature.
+          </p>
+        </descr>
+        <example file="example/gopherserver_allowmole"/>
+      </element>
+      <element name="TGopherServer.MoleExtensions">
+        <short>File extensions for mole scripts</short>
+        <example file="example/gopherserver_moleextensions"/>
+      </element>
+      <element name="TGopherServer.MoleHandlers">
+        <short>Application handlers for file extensions</short>
+        <descr>
+          <p>
+            Any file with an extension in
+            <link id="TGopherServer.MoleExtensions">MoleExtensions</link>
+            is handled like an executable.
+          </p>
+          <p>
+            Alternatively, MoleHandlers allows you to assign existing
+            executables to handle files.
+          </p>
+        </descr>
+        <example file="example/gopherserver_molehandlers"/>
+      </element>
+      <element name="TGopherServer.AdminName">
+        <short>Name of the admin of this server</short>
+        <descr>
+          Can be used with scripts/actions
+        </descr>
+      </element>
+      <element name="TGopherServer.AdminEmail">
+        <short>Server admin's email</short>
+        <descr>
+          Can be used with scripts/actions
+        </descr>
+      </element>
+      <element name="TGopherServer.Version">
+        <short>Version identifier</short>
+        <descr>
+          Can be used with scripts/actions. By default this is
+          <link id="GopherServer.GopherServerVersion">
+          GopherServerVersion</link>.
+        </descr>
+      </element>
+      <element name="TGopherServer.GopherFileName">
+        <short>Name of menu file to look for in directories</short>
+        <descr>
+          <p>
+            Change the name of the menu file TGopherServer will look for
+            in a directory to generate a custom menu.
+          </p>
+          <p>
+            By default, this is
+            <link id="GopherConsts.DotGopher">DotGopher</link>.
+          </p>
+        </descr>
+        <seealso>
+          <link id="Gopher Menu Files"/>
+        </seealso>
+      </element>
+      <element name="TGopherServer.LogFile">
+        <short>Name of log file</short>
+        <descr>
+          Set this to a file name to enable logging of server events.
+        </descr>
+      </element>
+      <element name="GetGopherType">
+        <short>Get the Gopher file type identifier for a Gopher menu file
+          alias name</short>
+        <example file="example/gopherserver_getgophertype"/>
+        <seealso>
+          <link id="Gopher Menu Files"/>
+          <link id="GopherConsts"/>
+        </seealso>
+      </element>
+    </module>
+  </package>
+</fpdoc-description>

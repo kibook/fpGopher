@@ -1,0 +1,34 @@
+<fpdoc-description>
+  <package name="fpGopher">
+    <module name="GopherMoleAction">
+      <descr>
+        <p>
+          An action class that uses a mole to build its response.
+        </p>
+        <p>
+          This combines the benefits of a mole, executable dynamic scripts,
+          with those of an action, making use of regular expression
+          patterns in the selector rather than simple file extensions.
+        </p>
+      </descr>
+      <element name="TMoleAction.Respond">
+        <descr>
+          TMoleAction descendants should not override this method. They
+          should only set the <link id="TMoleAction.Mole">Mole</link>
+          property to the mole their descendant will execute.
+        </descr>
+      </element>
+      <element name="TMoleAction.Mole">
+        <short>The mole that handles this action</short>
+        <descr>
+          This is the path to the mole that is executed when this action
+          class is called. It doesn't need to have an extension registered
+          in <link id="GopherServer.TGopherServer.MoleExtensions">
+          MoleExtensions</link>, but
+          <link id="GopherServer.TGopherServer.AllowMole">AllowMole</link>
+          must be enabled.
+        </descr>
+      </element>
+    </module>
+  </package>
+</fpdoc-description>

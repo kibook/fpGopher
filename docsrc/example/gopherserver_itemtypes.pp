@@ -1,0 +1,9 @@
+ItemTypes.Values['text/plain'] := giPlainText;
+ItemTypes.Values['image/gif'] := giGIF;
+ItemTypes.Values['text/html'] := giHTML;
+ItemTypes.Values['image/jpeg'] := giImage;
+ItemTypes.Values['image/png'] := giImage;
+ItemTypes.Values['audio/x-wav'] := giAudio;
+ItemTypes.Values['audio/mpeg'] := giAudio;
+ItemTypes.Values['audio/ogg'] := giAudio;
+ItemTypes.Values['application/pdf'] := giBinary;
