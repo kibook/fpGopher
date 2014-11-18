@@ -68,7 +68,7 @@ begin
     end else
     begin
       IsMenu := True;
-      WriteError(sErrServer)
+      WriteError(SErrServer)
     end;
 
     Exec.Free
