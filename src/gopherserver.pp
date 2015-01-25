@@ -234,7 +234,9 @@ begin
       repeat
         if (Info.Name <> '.') and (Info.Name <> '..') then
         begin
+          {$if FPC_FULLVERSION < 20701}
           Mime := ''; { bug in GetMimeType in 2.6.4 }
+          {$endif}
           Mime := MimeTypes.GetMimeType(ExtractFileExt(Info.Name));
           if DirectoryExists(Path + gsDir + Info.Name) then
           begin

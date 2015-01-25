@@ -153,7 +153,9 @@ begin
         end
         else if IsMatch(Dir + SearchRec.Name, '') then
         begin
+          {$ifdef FPC_FULLVERSION < 20701}
           Mime := ''; { bug in 2.6.4 }
+          {$endif}
           Mime := MimeTypes.GetMimeType(ExtractFileExt(SearchRec.Name));
 
           if FItemTypes.Values[Mime] = '' then
