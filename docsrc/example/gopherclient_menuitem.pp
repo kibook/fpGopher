@@ -5,7 +5,7 @@ begin
   Client.Get('gopher://foobar.com');
   
   { List all menu item display strings }
-  for i := 0 to Client.Contents.Count do
+  for i := 0 to Client.Contents.Count - 1 do
     WriteLn(Client.MenuItems[i].Text);
 
   Client.Free
