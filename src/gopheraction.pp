@@ -69,6 +69,7 @@ type
     procedure BeforeDestruction; override;
     function HasAction(Name: string): Boolean;
     procedure Register(Name: string; ClassOf: TGopherActionClass);
+    procedure Unregister(Name: string);
     property Classes[Name: string]: TGopherActionClass
       read GetAction write Register; default;
   end;
@@ -229,6 +230,18 @@ end;
 procedure TGopherActions.Register(Name: string; ClassOf: TGopherActionClass);
 begin
   FActions.Add(TGopherActionItem.Create(Name, ClassOf))
+end;
+
+procedure TGopherActions.Unregister(Name: string);
+var
+  i: Integer;
+begin
+  for i := 0 to FActions.Count - 1 do
+    if (FActions[i] as TGopherActionItem).Name = '(?i)^' + Name + '$' then
+    begin
+      FActions.Delete(i);
+      break
+    end
 end;
 
 initialization
