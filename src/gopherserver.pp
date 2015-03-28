@@ -326,9 +326,17 @@ begin
       end
     end else
     begin
-      FileStream := TFileStream.Create(Path, fmOpenRead);
-      Data.CopyFrom(FileStream, FileStream.Size);
-      FileStream.Free
+      try
+        try
+          FileStream := TFileStream.Create(Path, fmOpenRead);
+          Data.CopyFrom(FileStream, FileStream.Size);
+        finally
+          FileStream.Free
+        end
+      except
+        Menu.Add(Error(SErrServer));
+        FLog.Error(SErrServer, [])
+      end
     end;
     Exec.Free
   end else
