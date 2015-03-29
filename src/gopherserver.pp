@@ -159,6 +159,7 @@ var
   Ext: string;
   ActionString: string;
   Action: TGopherAction;
+  TemplateStream: TStringStream;
   ExitStatus: Integer;
   SearchString: string;
   SearchPos: Integer;
@@ -210,6 +211,14 @@ begin
     begin
       Respond(self);
       ContentStream.Position := 0;
+      if Template.HasContent then
+      begin
+        TemplateStream := TStringStream.Create(Template.GetContent);
+        ContentStream.CopyFrom(TemplateStream, TemplateStream.Size);
+        ContentStream.Position := 0;
+        UpdateGopherFile;
+        TemplateStream.Free
+      end;
       if IsMenu then
       begin
         ParseGopher(GopherFile, Selector, Menu)

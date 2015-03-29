@@ -9,6 +9,7 @@ uses
   SysUtils,
   Contnrs,
   IniFiles,
+  fpTemplate,
   GopherConsts;
 
 type
@@ -23,6 +24,7 @@ type
     FQuery: TStringList;
     FParams: TStringList;
     FSearch: TStringList;
+    FTemplate: TFPTemplate;
   public
     constructor Create(Sel, QStr, SStr, RAddr: string);
     destructor Destroy; override;
@@ -37,7 +39,8 @@ type
       ItemHost: string; ItemPort: Word);
     procedure WriteError(Message: string);
     procedure Write(S: string);
-    procedure Respond(Sender: TObject); virtual; abstract;    
+    procedure Respond(Sender: TObject); virtual; abstract;
+    procedure UpdateGopherFile;
     property RemoteAddress: string read FRemoteAddr;
     property Selector: string read FSelector;
     property ContentStream: TStream read FStream;
@@ -46,6 +49,7 @@ type
     property Query: TStringList read FQuery;
     property Params: TStringList read FParams;
     property Search: TStringList read FSearch;
+    property Template: TFPTemplate read FTemplate;
   end;
 
   TGopherActionClass = class of TGopherAction;
@@ -91,6 +95,7 @@ begin
   FRemoteAddr := RAddr;
   FStream := TMemoryStream.Create;
   FGopherFile := TIniFile.Create(FStream);
+  FTemplate := TFPTemplate.Create;
 
   FQuery := TStringList.Create;
   FQuery.Delimiter := gsQueryField;
@@ -119,6 +124,7 @@ destructor TGopherAction.Destroy;
 begin
   FGopherFile.Free;
   FStream.Free;
+  FTemplate.Free;
   FQuery.Free;
   FParams.Free;
   FSearch.Free;
@@ -180,6 +186,12 @@ end;
 procedure TGopherAction.Write(S: string);
 begin
   FStream.Write(S[1], Length(S) * SizeOf(S[1]))
+end;
+
+procedure TGopherAction.UpdateGopherFile;
+begin
+  FGopherFile.Free;
+  FGopherFile := TIniFile.Create(FStream)
 end;
 
 constructor TGopherActionItem.Create(AName: string; AClassOf: TGopherActionClass);

@@ -65,6 +65,19 @@
         </descr>
         <example file="example/gopheraction_respond"/>
       </element>
+      <element name="TGopherAction.UpdateGopherFile">
+        <short>Update menu configuration from content stream</short>
+        <descr>
+          <p>
+            For an action which returns a menu
+            (<link id="TGopherAction.IsMenu">IsMenu</link> = True), if the
+            menu contents are modified directly through ContentStream,
+            this procedure must be called to apply the changes to the
+            GopherFile.
+          </p>
+        </descr>
+        <example file="example/gopheraction_updategopherfile"/>
+      </element>
       <element name="TGopherAction.WriteInfo">
         <short>Write an information menu item</short>
         <descr>
@@ -134,7 +147,9 @@
             <link id="TGopherAction.WriteItem">WriteItem</link>,
             <link id="TGopherAction.WriteInfo">WriteInfo</link>, and
             <link id="TGopherAction.WriteError">WriteError</link>
-            procedures.
+            procedures. If a menu's content is loaded directly in to
+            ContentStream, <link id="TGopherAction.UpdateGopherFile">
+            UpdateGopherFile</link> must be called.
           </p>
           <p>
             All other types of responses should write their data directly
@@ -221,6 +236,18 @@
         <seealso>
           <link id="GopherSearch"/>
         </seealso>
+      </element>
+      <element name="TGopherAction.Template">
+        <short>Menu template</short>
+        <descr>
+          <p>
+            Rather than generating an entire menu dynamically, a template
+            menu file may be used containing static elements and "tags"
+            that can be filled in with dynamic content when the menu is
+            selected.
+          </p>
+        </descr>
+        <example file="example/gopheraction_template"/>
       </element>
     </module>
   </package>
