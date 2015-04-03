@@ -18,6 +18,7 @@ begin
       AddUnit('src/gophercaps.pp');
       AddUnit('src/gopherclient.pp');      
       AddUnit('src/gophersearch.pp');
+      AddUnit('src/molemenu.pp');
       AddFPDoc('src/gopherconsts.pp', 'docsrc/gopherconsts.xml');
       AddFPDoc('src/gopheraction.pp', 'docsrc/gopheraction.xml');
       AddFPDoc('src/gopherlog.pp', 'docsrc/gopherlog.xml');
@@ -25,7 +26,8 @@ begin
       AddFPDoc('src/gophermoleaction.pp', 'docsrc/gophermoleaction.xml');
       AddFPDoc('src/gophercaps.pp', 'docsrc/gophercaps.xml');
       AddFPDoc('src/gopherclient.pp', 'docsrc/gopherclient.xml');      
-      AddFPDoc('src/gophersearch.pp', 'docsrc/gophersearch.xml')
+      AddFPDoc('src/gophersearch.pp', 'docsrc/gophersearch.xml');
+      AddFPDoc('src/molemenu.pp', 'docsrc/molemenu.xml')
     end
   end;
   Installer.Run

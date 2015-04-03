@@ -1,0 +1,33 @@
+<fpdoc-description>
+  <package name="fpGopher">
+    <module name="MoleMenu">
+      <descr>
+        <p>
+          Useful functions for a Pascal mole that generates a menu. Each
+          call to Info, Error, or Item adds that kind of Gopher menu item
+          to the newly generated menu.
+        </p>
+        <p>
+          The unit handles the formatting of the actual menu.
+        </p>
+      </descr>
+      <element name="error">
+        <short>Add an inline text error message</short>
+      </element>
+      <element name="Info">
+        <short>Add an inline text info message</short>
+      </element>
+      <element name="Item">
+        <short>Add an item</short>
+        <descr>
+          <p>Adds an item of the specified type, with the specified
+             display text, pointing to the specified path.</p>
+          <p>ItemHost defaults to the REMOTE_HOST environment variable that
+             should be passed to this mole by the Gopher server.</p>
+          <p>ItemPort defaults to the REMOTE_PORT environment variable that
+             should be passed to this mole by the Gopher server.</p>
+        </descr>
+      </element>
+    </module>
+  </package>
+</fpdoc-description>
